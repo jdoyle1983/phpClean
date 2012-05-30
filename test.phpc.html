@@ -1,0 +1,94 @@
+<html>
+	<head>
+		<title>Test PHPClean Site</title>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td><phpc:TextBox Id="txtTest" /></td>
+				<td><phpc:Label Id="lblTest4" Text="No Text Entered" /></td>
+			</tr>
+			<tr>
+				<td><phpc:Button Id="btnTest" Text="Test Button" OnClick="btnTest_OnClick" /></td>
+				<td><phpc:Label Id="lblTest" Text="No Event Fired" /></td>
+			</tr>
+			<tr>
+				<td>
+					<phpc:DropDownList Id="ddlTest" OnSelectedIndexChanged="ddlTest_OnSelectedIndexChanged">
+						<ListItem Name="Item 1" Value="Item1" />
+						<ListItem Name="Item 2" Value="Item2" />
+						<ListItem Name="Item 3" Value="Item3" />
+					</phpc:DropDownList>
+				</td>
+				<td><phpc:Label Id="lblTest2" Text="No Item Selected" /></td>
+			</tr>
+			<tr>
+				<td><phpc:CheckBox Id="chkTest" OnCheckChanged="chkTest_OnCheckChanged" /></td>
+				<td>
+					<phpc:Panel Id="pnlTest">
+						<phpc:Label Id="lblTest3" Text="No Event Fired" />
+					</phpc:Panel>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<table>
+						<tr>
+							<td>
+								<phpc:RadioButton Id="rb1" Group="Group1" Value="G1B1" OnCheckChanged="rbGroup1_CheckChanged" /><span>Gr1Bu1</span><br />
+								<phpc:RadioButton Id="rb2" Group="Group1" Value="G1B2" OnCheckChanged="rbGroup1_CheckChanged" /><span>Gr1Bu2</span><br />
+								<phpc:RadioButton Id="rb3" Group="Group1" Value="G1B3" OnCheckChanged="rbGroup1_CheckChanged" /><span>Gr1Bu3</span>
+							</td>
+							<td>
+								<phpc:RadioButton Id="rb4" Group="Group2" Value="G2B1" OnCheckChanged="rbGroup2_CheckChanged" /><span>Gr2Bu1</span><br />
+								<phpc:RadioButton Id="rb5" Group="Group2" Value="G2B2" OnCheckChanged="rbGroup2_CheckChanged" /><span>Gr2Bu2</span><br />
+								<phpc:RadioButton Id="rb6" Group="Group2" Value="G2B3" OnCheckChanged="rbGroup2_CheckChanged" /><span>Gr2Bu3</span>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<phpc:Label Id="lblTest5" Text="No Event Fired" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<phpc:DataResult Id="drTest" ></phpc:DataResult>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<phpc:ListView Id="lvTest">
+						<EmptyDataTemplate>
+							<b>No Data</b>
+						</EmptyDataTemplate>
+						<LayoutTemplate>
+							<table>
+								<tr>
+									<th>Row Id</th>
+									<th>Column 1</th>
+									<th>Column 2</th>
+								</tr>
+								<ItemPlaceHolder />
+							</table>
+						</LayoutTemplate>
+						<ItemTemplate>
+							<tr>
+								<td><Eval Source="id" /></td>
+								<td><Eval Source="col1" /></td>
+								<td><Eval Source="col2" /></td>
+							</tr>
+						</ItemTemplate>
+						<AltItemTemplate>
+							<tr>
+								<td bgcolor="Yellow"><Eval Source="id" /></td>
+								<td bgcolor="Yellow"><Eval Source="col1" /></td>
+								<td bgcolor="Yellow"><Eval Source="col2" /></td>
+							</tr>
+						</AltItemTemplate>
+					</phpc:ListView>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>
