@@ -1,0 +1,61 @@
+Revision: 3
+Author: jdoyle
+Date: Tuesday, July 05, 2011 12:53:12 AM
+Message:
+Added PHPEclipse project.
+
+
+----
+Added : /trunk/.project
+
+Revision: 2
+Author: jdoyle
+Date: Tuesday, July 05, 2011 12:51:46 AM
+Message:
+* Rebuilt phpClean from scratch, now more Object Oriented.
+* Interfaces to add after market controls.
+* Controls have more options to utilize java script.
+* All control properties automatically turned into object properties
+  and saved in the view state.
+* Places to add custom variables to the object and have them retain
+  throught post backs.
+
+* Many other improvements.
+
+
+----
+Added : /trunk/Controls
+Added : /trunk/Controls/phpCleanControl_Button.lib.php
+Added : /trunk/Controls/phpCleanControl_CheckBox.lib.php
+Added : /trunk/Controls/phpCleanControl_DataResult.lib.php
+Added : /trunk/Controls/phpCleanControl_DropDownList.lib.php
+Added : /trunk/Controls/phpCleanControl_ImageButton.lib.php
+Added : /trunk/Controls/phpCleanControl_Label.lib.php
+Added : /trunk/Controls/phpCleanControl_ListView.lib.php
+Added : /trunk/Controls/phpCleanControl_Panel.lib.php
+Added : /trunk/Controls/phpCleanControl_RadioButton.lib.php
+Added : /trunk/Controls/phpCleanControl_TextBox.lib.php
+Added : /trunk/DataConnections
+Added : /trunk/DataConnections/phpCleanDataConnMySql.lib.php
+Added : /trunk/DataConnections/phpCleanDataConnection.lib.php
+Added : /trunk/phpClean.js
+Added : /trunk/phpCleanControl.lib.php
+Added : /trunk/phpCleanDebug.php
+Added : /trunk/phpCleanPage.lib.php
+Added : /trunk/phpCleanUtils.lib.php
+Added : /trunk/phpCleanViewState.lib.php
+Added : /trunk/phpCleanXml.lib.php
+Added : /trunk/test.php
+Added : /trunk/test.phpc.html
+
+Revision: 1
+Author: jdoyle
+Date: Tuesday, July 05, 2011 12:47:30 AM
+Message:
+initial import
+
+----
+Added : /branches
+Added : /tags
+Added : /trunk
+
