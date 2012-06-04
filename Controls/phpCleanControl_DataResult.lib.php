@@ -122,7 +122,7 @@ class phpcControl_DataResult extends phpcControl
 			$ubold = $ucenter->addChild("b");
 			$ubold->Text = ($this->Text == null ? '' : $this->text);
 			
-			if($this->ShowHeaders == null || $this->ShowHeaders == 1)
+			if($this->ShowHeaders == null || phpcUtils::IsTrueVal($this->ShowHeaders))
 			{
 				$headerrow = $table->addChild("tr");
 				for($i = 0; $i < $this->ResultData['FieldCount']; $i++)

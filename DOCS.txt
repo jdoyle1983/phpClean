@@ -1,0 +1,252 @@
+Below is a brief run down of the phpClean system.
+Questions or Comments? Contact Jason at jdoyle1983@gmail.com
+
+
+phpc:Label - Span Label
+	DESIGN PROPERTIES:
+		id - (unique control id)
+		visible - (true/false) - Sets the controls visibility
+		text - (string) - Intiail value of the label
+	CLASS DETAILS - (All Design Properties Above Available)
+		PROPERTIES:
+			No Additional.
+		METHODS:
+			None.
+		
+		
+		
+		
+	
+phpc:Panel - Top Level Container
+	DESIGN PROPERTIES:
+		id - (unique control id)
+		visible - (true/false) - Sets the control, and all child controls visibility
+	CLASS DETAILS  - (All Design Properties Above Available)
+		PROPERTIES:
+			No Additional.
+		METHODS:
+			None.
+		
+		
+		
+		
+	
+phpc:TextBox - Entry Text Box
+	DESIGN PROPERTIES:
+		id - (unique control id)
+		visible - (true/false) - Sets the controls visibility
+		text - (string) - The controls default text value
+		type - (text/password) - Sets the textbox display style
+		width - (int) - Sets the width of the textbox in characters
+	CLASS DETAILS  - (All Design Properties Above Available)
+		PROPERTIES:
+			No Additional.
+		METHODS:
+			None.
+		
+		
+		
+		
+	
+phpc:Button - Clickable Button
+	DESIGN PROPERTIES:
+		id - (unique control id)
+		visible - (true/false) - Sets the controls visibility
+		onclick - (page class function) - Function to be called when the button is clicked (function button_Click( $sender ) { })
+	CLASS DETAILS  - (All Design Properties Above Available)
+		PROPERTIES:
+			No Additional.
+		METHODS:
+			None.
+		
+		
+		
+		
+	
+phpc:ImageButton - Clickable Image Button
+	DESIGN PROPERTIES:
+		id - (unique control id)
+		visible - (true/false) - Sets the controls visibility
+		onclick - (page class function) - Function to be called when the button is clicked
+		src - (string) - URL to image
+		alt - (string) - Alt text to show
+	CLASS DETAILS  - (All Design Properties Above Available)
+		PROPERTIES:
+			No Additional.
+		METHODS:
+			None.
+		
+		
+		
+		
+	
+phpc:CheckBox - Standard CheckBox
+	DESIGN PROPERTIES:
+		id - (unique control id)
+		visible - (true/false) - Sets the controls visibility
+		oncheckchanged - (page class function) - Function to be called when the checkbox state is changed
+		checked - (true/false) - Checkbox check state
+	CLASS DETAILS  - (All Design Properties Above Available)
+		PROPERTIES:
+			No Additional.
+		METHODS:
+			None.
+		
+		
+		
+		
+	
+phpc:DropDownList - Drop Down List
+	DESIGN PROPERTIES:
+		id - (unique control id)
+		visible - (true/false) - Sets the controls visibility
+		onselectedindexchanged - (page class function) - Function to be called when the selected index has changed (function check_Changed( $sender ) { })
+	CHILD ELEMENTS:
+		ListItem
+			DESIGN PROPERTIES:
+				Name - (string) - Item Name
+				Value - (string) - Item Value
+				Selected - (true/false) - Default selected
+	CLASS DETAILS  - (All Design Properties Above Available)
+		PROPERTIES:
+			No Additional.
+		METHODS:
+			SelectedName() - Get name of currently selected item
+			SelectedValue() - Get value of currently selected item
+			SetSelectedValue($val) - Set selected item to the one that has a value of $val
+			SetSelectedIndex($idx) - Set selected index to $idx
+			AddListItem($ItemName, $ItemValue) - Add item with $ItemName and $ItemValue
+			ClearItems() - Clear all items from drop down
+			GetItemName($idx) - Get item name at $idx
+			GetItemValue($idx) - Get item value at $idx
+				
+				
+				
+				
+			
+phpc:RadioButton - Radio Button Group
+	DESIGN PROPERTIES:
+		id - (unique control id)
+		visible - (true/false) - Sets the controls visibility
+		group - (string) - Group this radio list belongs to
+		checked - (true/false) - Default selected
+		oncheckchanged - (page class function) - Function to be called when the check state of this item changes (function check_Changed( $sender ) { })
+	CLASS DETAILS  - (All Design Properties Above Available)
+		PROPERTIES:
+			No Additional.
+		METHODS:
+			None.
+		
+		
+		
+	
+phpc:DataResult - Result From Database Result
+	DESIGN PROPERTIES:
+		id - (unique control id)
+		visible - (true/false) - Sets the controls visibility
+	CLASS DETAILS  - (All Design Properties Above Available)
+		PROPERTIES:
+			No Additional.
+		METHODS:
+			DataSource($dataconnection) - Sets the datasource, must be a child of phpcDataConnection abstract class.
+			DataBind() - Bind the data to the control (force datasource to retreive data, and parse)
+		
+		
+		
+		
+	
+phpc:ListView - Result From Databound
+	DESIGN PROPERTIES:
+		id - (unique control id)
+		visible - (true/false) - Sets the controls visibility
+	CHILD ELEMENTS:
+		EmptyDataTemplte - HTML to display if no data is available
+		LayoutTemplate - HTML to display if there is data available
+			CHILD ELEMENTS:
+				ItemPlaceHolder - Item template will be replaced with the results of ItemTemplate / AltItemTemplate for each row
+		ItemTemplate - HTML to display for each row in the result (used with AltItemTemplate if available)
+			CHILD ELEMENTS:
+				Eval - Display Column Data
+					DESIGN PROPERTIES:
+						Source - (string) - Column name from databound
+		AltItemTemplate - HTML to display for each alternating row in the result
+			CHILD ELEMENTS:
+				Eval - Display Column Data
+					DESIGN PROPERTIES:
+						Source - (string) - Column name from databound
+	CLASS DETAILS  - (All Design Properties Above Available)
+		PROPERTIES:
+			No Additional.
+		METHODS:
+			DataSource($dataconnection) - Sets the datasource, must be a child of the phpcDataConnection abstract class.
+			DataBind() - Bind the data to the control (force datasource to retreive data, and parse)
+			
+			
+			
+			
+NON DESIGNER CLASSES
+
+abstract class phpcDataConnection - Base class used for data controls
+	PROPERTIES:
+		None.
+	METHODS:
+		abstract function Execute() - Execute the data retreival
+		abstract function NumRows() - Number of rows in the result
+		abstract function NumFields() - Number of fields per row
+		abstract function GetFieldName( $FieldId ) - Name of the field at $FieldId
+		abstract function GetRowFieldValue( $RowId, $FieldName ) - Value of the column $FieldName in row $RowId
+	
+	
+	
+	
+class phpcDataConnMySql extends phpcDataConnection - MySQL Data Connection
+	PROPERTIES:
+		None.
+	METHODS:
+		function __construct($Host, $UserName, $Password, $Database) - Set Connection Properties
+		function SetQuery($Sql) - Set the query to $Sql
+		function ExecuteNonQuery() - Execute query, do not return any results. Returns true when query was executed correctly, false otherwise
+		function Execute() - Execute query, return result set. Returns true when query was executed correctly, false otherwise.
+		function NumFields() - Number of columns in result set
+		function GetFieldName( $FieldId ) - Get field name for column $FieldId
+		function NumRows() - Get the number of rows in the result
+		function GetRowFieldValue( $RowId, $FieldName ) - Get the value of column $FieldName at row $RowId
+		
+		
+		
+class phpcUtils - Utility Functions
+	PROPERTIES:
+		None.
+	METHODS:
+		public static function IsTrueVal( $val ) - Returns true if the value matches any of the valid TRUE types (1,true,yes)
+		public static function IsFalseVal( $val ) - Returns true if the value matches any of the valid FALSE types (0,false,no)
+		
+		
+		
+		
+
+Create a phpClean Page:
+	* Create extension of phpcPage
+	* Extension contruct should call base construct with XML Design File:
+		function __construct()
+		{
+			parent::__construct("example.phpc.html");
+		}
+	* Page_Load function can be used, and will be fired when the page is loaded, post back can be probed:
+		function Page_Load()
+		{
+			if(!$this->IsPostBack)
+			{
+	* Controls can be referenced by ID with the $this object:
+		$this->lblTest->Text = "Item Was Clicked!";
+	* Last PHP line of page should be calling a new instance of the extension class:
+		new Page();
+	* See test.php/test.phpc.html for page creation example
+		
+		
+		
+		
+		
+Create a phpClean Control:
+	* See existing controls for implementation examples
+	* ANY ATTRIBUTE APPLIED TO A CONTROL WILL BE AVAILABLE AS A PROPERTY, AND WILL RETAIN IT'S VALUE DURING POST BACKS IF CHANGED.

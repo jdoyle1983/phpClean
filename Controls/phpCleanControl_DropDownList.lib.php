@@ -46,7 +46,7 @@ class phpcControl_DropDownList extends phpcControl
 	
 	public function JsStatePassElement()
 	{
-		return "phpClean_Control_". $this->id;
+		return "phpClean_Control_" . $this->id;
 	}
 	
 	public function JsStatePassValByValue()
