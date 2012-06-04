@@ -11,6 +11,6 @@ Currently there are only a few base objects defined, but it is completely extens
 
 It handles object state management, object page rendering, and call back methods.
 
-It's main draw back, it requires STRING XML formatting for the designer pages.
+It's main draw back, it requires STRICT XML formatting for the designer pages.
 
 You can see an example of the library in use in the source tree.
