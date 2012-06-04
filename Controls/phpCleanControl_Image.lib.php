@@ -23,23 +23,23 @@
 
 
 
-class phpcControl_RadioButton extends phpcControl
+class phpcControl_Image extends phpcControl
 {
 	public function RespondsToTag()
 	{
-		return "phpc:radiobutton";
+		return "phpc:image";
 	}
 	
 	public function GetInstance()
 	{
-		return new phpcControl_RadioButton();
+		return new phpcControl_Image();
 	}
 	
 	
 	
 	public function JsStatePassValByElement()
 	{
-		return false;
+		return true;
 	}
 	
 	public function JsStatePassElement()
@@ -59,19 +59,12 @@ class phpcControl_RadioButton extends phpcControl
 	
 	public function JsStateCustom()
 	{
-		return true;
+		return false;
 	}
 	
 	public function JsStateCustomScript()
 	{
-		//Change the which callback is called based on the state of the checkbox
-		$fCall1 = "        phpClean_AddFieldByValue( Form, '" . $this->id . "','" . $this->id . "','checked');";
-		$fCall2 = "        phpClean_AddFieldByValue( Form, '" . $this->id . "','" . $this->id . "','');";
-		$rValue = "        if(" . $this->JsStatePassElement() . ".checked == 1)\n";
-		$rValue .= "                " . $fCall1 . "\n";
-		$rValue .= "        else\n";
-		$rValue .= "                " . $fCall2 . "\n";
-		return $rValue;
+		return "";
 	}
 	
 	
@@ -87,37 +80,31 @@ class phpcControl_RadioButton extends phpcControl
 	
 	public function ParseObject(&$InObject)
 	{
-		//Set the check state based on default input
-		if($this->checked == null || phpcUtils::IsFalseVal($this->checked))
-			$this->SetStateProperty("checked", false);
-		else
-			$this->SetStateProperty("checked", true);
 		
-		//Set a default group if none is supplied	
-		if($this->group == null || $this->group == "")
-			$this->SetStateProperty("group", "Default");
 	}
 	
 	public function ParseQueryString()
 	{
-		if($this->text != null && $this->text != "")
-			$this->checked = true;
-		else
-			$this->checked = false;
+		
 	}
 	
 	public function DrawControl(&$OutputParent, &$InputNode)
 	{
 		$input = $OutputParent->addChild("input");
-		$input->addAttribute("type", "radio");
-		$input->addAttribute("id", $this->JsStatePassElement());
-		$input->addAttribute("name", $this->group);
-		$input->addAttribute("value", $this->value);
-		if($this->checked)
-			$input->addAttribute("checked", "checked");
-		if($this->oncheckchanged != null && $this->oncheckchanged != "")
-			$input->addAttribute("OnClick", $this->GenEventCall("OnCheckChanged"));
+		$input->addAttribute("id", JsStatePassElement());
+		$input->addAttribute("name", JsStatePassElement());
+		$input->addAttribute("type", "hidden");
+		$input->addAttribute("value", $this->text == null ? "" : $this->text);
 		
+		$img = $OutputParent->addChild("img");
+		if($this->img != null)
+			$img->addAttribute("src", $this->src);
+		if($this->alt != null)
+			$img->addAttribute("alt", $this->alt);
+		if($this->width != null)
+			$img->addAttribute("width", $this->width);
+		if($this->height != null)
+			$img->addAttribute("height", $this->height);
 	}
 	
 	public function PrepareStates()

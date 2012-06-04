@@ -96,6 +96,7 @@ class phpcControl_Panel extends phpcControl
 		$input->addAttribute("name", $this->JsStatePassElement());
 		$input->addAttribute("value", $this->text == null ? "" : $this->text);
 		
+		//Send drawing operations back to the system for children of this control
 		$span = $OutputParent->addChild("span");
 		for($i = 0; $i < count($InputNode->Children); $i++)
 			$this->phpcPage->DrawNodes($InputNode->Children[$i], $span);

@@ -213,6 +213,7 @@ class phpcControl_ListView extends phpcControl
 	
 	public function RetrieveStates()
 	{
+		//Get db results from teh view state
 		if( $this->GetStateProperty("RowCount") != null )
 		{
 			$this->ResultData['RowCount'] = (int)$this->GetStateProperty("RowCount");
@@ -228,7 +229,8 @@ class phpcControl_ListView extends phpcControl
 	}
 	
 	public function PrepareStates()
-	{
+	{ 
+		//Push the db results into the view state (might not be the base idea, but works for now)
 		$this->SetStateProperty("RowCount", $this->ResultData['RowCount']);
 		$this->SetStateProperty("FieldCount", $this->ResultData['FieldCount']);
 		for($i = 0; $i < $this->ResultData['FieldCount']; $i++)

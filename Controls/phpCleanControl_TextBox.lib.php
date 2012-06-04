@@ -91,6 +91,7 @@ class phpcControl_TextBox extends phpcControl
 	public function DrawControl(&$OutputParent, &$InputNode)
 	{
 		$input = $OutputParent->addChild("input");
+		//If password mode, set native input type to password instead of text
 		if($this->textmode != null && strtolower($this->textmode) == "password")
 			$input->addAttribute("type", "password");
 		else
@@ -98,6 +99,7 @@ class phpcControl_TextBox extends phpcControl
 		$input->addAttribute("id", $this->JsStatePassElement());
 		$input->addAttribute("name", $this->JsStatePassElement());
 		$input->addAttribute("value", $this->text == null ? "" : $this->text);
+		//If a width was supplied, emit it to the native input
 		if($this->width != null)
 			$input->addAttribute("size", $this->width);
 	}
