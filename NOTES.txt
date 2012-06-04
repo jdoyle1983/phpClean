@@ -1,0 +1,2 @@
+* I had thought about create a "User Control" interface, but the more I think about it, I don't really see the point.
+  Any benefit it would provide already exists, you can create custom controls "out of the box".

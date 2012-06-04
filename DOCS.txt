@@ -227,7 +227,7 @@ class phpcUtils - Utility Functions
 
 Create a phpClean Page:
 	* Create extension of phpcPage
-	* Extension contruct should call base construct with XML Design File:
+	* Extension construct should call base construct with XML Design File:
 		function __construct()
 		{
 			parent::__construct("example.phpc.html");
@@ -249,4 +249,4 @@ Create a phpClean Page:
 		
 Create a phpClean Control:
 	* See existing controls for implementation examples
-	* ANY ATTRIBUTE APPLIED TO A CONTROL WILL BE AVAILABLE AS A PROPERTY, AND WILL RETAIN IT'S VALUE DURING POST BACKS IF CHANGED.
+	* ANY ATTRIBUTE APPLIED TO A CONTROL IN THE XML WILL BE AVAILABLE AS A PROPERTY, AND WILL RETAIN IT'S VALUE DURING POST BACKS IF CHANGED.
