@@ -41,6 +41,9 @@ class phpcPage
 		$this->RegisterControl(new phpcControl_CheckBox());
 		$this->RegisterControl(new phpcControl_DataResult());
 		$this->RegisterControl(new phpcControl_DropDownList());
+		$this->RegisterControl(new phpcControl_FileUpload());
+		$this->RegisterControl(new phpcControl_Hidden());
+		$this->RegisterControl(new phpcControl_Image());
 		$this->RegisterControl(new phpcControl_ImageButton());
 		$this->RegisterControl(new phpcControl_Label());
 		$this->RegisterControl(new phpcControl_ListView());
