@@ -39,6 +39,7 @@ class phpcPage
 	{
 		//Register Base Controls Here
 		$this->RegisterControl(new phpcControl_Button());
+		$this->RegisterControl(new phpcControl_Calendar());
 		$this->RegisterControl(new phpcControl_CheckBox());
 		$this->RegisterControl(new phpcControl_DataResult());
 		$this->RegisterControl(new phpcControl_DropDownList());
@@ -91,17 +92,7 @@ class phpcPage
 	
 	function PrepareJavascript()
 	{
-		$rValue = "\n";
-		
-		$sourcepath = $this->AppRoot . "phpClean.js";
-		$handle = @fopen($sourcepath, "r");
-		if($handle)
-		{
-			while(($buffer = fgets($handle)) !== false)
-				$rValue .= $buffer;
-			fclose($handle);
-		}
-		$rValue .= "\n\n";
+		$rValue = "\n\n";
 		$rValue .= "function phpClean_PrepareControls( Form )";
 		$rValue .= "{\n";
 		for($i = 0; $i < count($this->PageControls); $i++)
@@ -172,12 +163,25 @@ class phpcPage
 			
 			if(strtolower($InputNode->Name) == "head")
 			{
+				$jqucNode = $newNode->addChild( "link" );
+				$jqucNode->addAttribute( "href", $this->AppRoot . "jquery-ui-1.8.20.custom.css" );
+				$jqucNode->addAttribute( "rel", "stylesheet" );
+				$jqucNode->addAttribute( "type", "text/css" );
+				
 				$jqNode = $newNode->addChild( "script" );
-				$jqNode->addAttribute( "language", "JavaScript" );
 				$jqNode->addAttribute( "src", $this->AppRoot . "jquery-1.7.2.min.js" );
+				$jqNode->Text = "//jQuery";
+				
+				$jquNode = $newNode->addChild( "script" );
+				$jquNode->addAttribute( "src", $this->AppRoot . "jquery-ui-1.8.20.custom.min.js" );
+				$jquNode->Text = "//jQuery UI";
+				
+				$pcNode = $newNode->addChild( "script" );
+				$pcNode->addAttribute( "src", $this->AppRoot . "phpClean.js" );
+				$pcNode->Text = "//phpClean";
+				
 				$jsNode = $newNode->addChild( "script" );
 				$jsNode->Text = $this->PrepareJavascript();
-				$jsNode->addAttribute( "language", "JavaScript" );
 			}
 			else if(strtolower($InputNode->Name) == "body")
 			{

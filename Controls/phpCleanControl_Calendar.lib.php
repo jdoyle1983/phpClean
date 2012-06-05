@@ -23,23 +23,23 @@
 
 
 
-class phpcControl_FileUpload extends phpcControl
+class phpcControl_Calendar extends phpcControl
 {
 	public function RespondsToTag()
 	{
-		return "phpc:fileupload";
+		return "phpc:calendar";
 	}
 	
 	public function GetInstance()
 	{
-		return new phpcControl_FileUpload();
+		return new phpcControl_Calendar();
 	}
 	
 	
 	
 	public function JsStatePassValByElement()
 	{
-		return false;
+		return true;
 	}
 	
 	public function JsStatePassElement()
@@ -59,18 +59,10 @@ class phpcControl_FileUpload extends phpcControl
 	
 	public function JsStateCustom()
 	{
-		return true;
+		return false;
 	}
 	
 	public function JsStateCustomScript()
-	{
-		return "        Form.appendChild( document.getElementById( '" . $this->JsStatePassElement() . "' ) );\n";
-	}
-	
-	
-	
-	
-	public function AddJavaScript()
 	{
 		return "";
 	}
@@ -78,53 +70,29 @@ class phpcControl_FileUpload extends phpcControl
 	
 	
 	
+	public function AddJavaScript()
+	{
+		return "$(document).ready(function() { $('#" . $this->JsStatePassElement() . "').datepicker(); });";
+	}
+	
+	
+	
+	
 	public function ParseObject(&$InObject)
 	{
-		
 	}
 	
 	public function ParseQueryString()
 	{
-		if($this->Initialized != true)
-		{
-			$this->Initialized = true;
-			$this->HasFile = false;
-			$this->Error = "0";
-			$this->Name = "";
-			$this->Size = 0;
-			$this->Type = "";
-			$this->Contents = "";
-		}
-		
-		if(isset($_FILES[$this->JsStatePassElement()]))
-		{
-			if($_FILES[$this->JsStatePassElement()]["error"] > 0)
-			{
-				$this->Error = $_FILES[$this->JsStatePassElement()]["error"];
-				$this->HasFile = false;
-				$this->Name = "";
-				$this->Size = 0;
-				$this->Type = "";
-				$this->Contents = "";
-			}
-			else
-			{
-				$this->HasFile = true;
-				$this->Error = $_FILES[$this->JsStatePassElement()]["error"];
-				$this->Contents = file_get_contents($_FILES[$this->JsStatePassElement()]["tmp_name"]);
-				$this->Name = $_FILES[$this->JsStatePassElement()]["name"];
-				$this->Size = $_FILES[$this->JsStatePassElement()]["size"];
-				$this->Type = $_FILES[$this->JsStatePassElement()]["type"];
-			}
-		}
 	}
 	
 	public function DrawControl(&$OutputParent, &$InputNode)
 	{
 		$input = $OutputParent->addChild("input");
-		$input->addAttribute("type", "file");
+		$input->addAttribute("type", "text");
 		$input->addAttribute("id", $this->JsStatePassElement());
 		$input->addAttribute("name", $this->JsStatePassElement());
+		$input->addAttribute("value", $this->text == null ? "" : $this->text);
 	}
 	
 	public function PrepareStates()

@@ -30,6 +30,7 @@ include_once('phpCleanControl.lib.php');
 include_once('phpCleanViewState.lib.php');
 
 include_once('Controls/phpCleanControl_Button.lib.php');
+include_once('Controls/phpCleanControl_Calendar.lib.php');
 include_once('Controls/phpCleanControl_CheckBox.lib.php');
 include_once('Controls/phpCleanControl_DataResult.lib.php');
 include_once('Controls/phpCleanControl_DropDownList.lib.php');

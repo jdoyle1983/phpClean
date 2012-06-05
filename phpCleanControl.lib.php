@@ -122,7 +122,8 @@ abstract class phpcControl
 	function _AddJavaScript()
 	{
 		if(phpcUtils::IsTrueVal($this->visible))
-			$this->AddJavaScript();
+			return $this->AddJavaScript();
+		return "";
 	}
 	
 	function _DrawControl( &$OutputParent, &$InputNode )
