@@ -57,7 +57,7 @@ class phpcViewState
 	
 	function RestoreViewState( $State )
 	{
-		$uncompressed = base64_decode(gzuncompress($State));// gzinflate( $compressed );
+		$uncompressed = gzuncompress(base64_decode($State));
 
 		//Break out individual objects
 		$tObjects = explode( "=`^", $uncompressed );
