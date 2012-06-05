@@ -21,7 +21,6 @@
 //    	Contact: 
 //    				email: 			jdoyle1983@gmail.com
 
-
 include_once('phpCleanDebug.php');
 
 class Page extends phpcPage
@@ -105,11 +104,13 @@ class Page extends phpcPage
 	{
 		if($this->fuFile->HasFile)
 		{
-			$this->lblResult->Text = "Temp File: " . $this->fuFile->TempPath . "  Size: " . $this->fuFile->Size . "  Name: " . $this->fuFile->Name . "  Type: " . $this->fuFile->Type;
+			$this->lblResult->Text = "Error: " . $this->fuFile->Error . "  Has File: " . $this->fuFile->HasFile . "  Temp File: " . $this->fuFile->TempPath . "  Size: " . $this->fuFile->Size . "  Name: " . $this->fuFile->Name . "  Type: " . $this->fuFile->Type;
+			$this->lblResult2 = $this->fuFile->Contents;
 		}
 		else
 		{
 			$this->lblResult->Text = "No File Uploaded";
+			$this->lblResult2->Text = "";
 		}
 		
 		$this->hHiddenData->Text = time();

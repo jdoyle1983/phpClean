@@ -25,15 +25,14 @@
 
 class phpcUtils
 {
+	private static function str_left($val)
+	{
+		
+	}
+	
 	public static function SelfUrl()
 	{
-		//Picked up this code on the net somewhere, not sure who the author is,
-		//if you are, or you know who is, contact Jason Doyle, and credit
-		//will be given to the original author.
-		$s = empty($_SERVER["HTTPS"]) ? '' : ($_SERVER["HTTPS"] == "on") ? "s" : "";
-		$protocol = strleft(strtolower($_SERVER["SERVER_PROTOCOL"]), "/").$s;
-		$port = ($_SERVER["SERVER_PORT"] == "80") ? "" : (":".$_SERVER["SERVER_PORT"]);
-		return $protocol . "://" . $_SERVER['SERVER_NAME'] . $port . $_SERVER['REQUEST_URI'];
+		return ((isset($_SERVER['HTTPS']) == true && $_SERVER['HTTPS'] == 'on') ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 	}
 	
 	public static function IsTrueVal( $val )

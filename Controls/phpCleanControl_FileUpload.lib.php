@@ -39,7 +39,7 @@ class phpcControl_FileUpload extends phpcControl
 	
 	public function JsStatePassValByElement()
 	{
-		return true;
+		return false;
 	}
 	
 	public function JsStatePassElement()
@@ -59,12 +59,12 @@ class phpcControl_FileUpload extends phpcControl
 	
 	public function JsStateCustom()
 	{
-		return false;
+		return true;
 	}
 	
 	public function JsStateCustomScript()
 	{
-		return "";
+		return "        Form.appendChild( document.getElementById( '" . $this->JsStatePassElement() . "' ) );\n";
 	}
 	
 	
@@ -85,23 +85,40 @@ class phpcControl_FileUpload extends phpcControl
 	
 	public function ParseQueryString()
 	{
-		$this->HasFile = false;
-		$this->TempPath = "";
-		$this->Error = "";
-		$this->Name = "";
-		$this->Size = 0;
-		$this->Type = "";
-		
-		if($_FILES[$this->JsStatePassElement()]["error"] > 0)
-			$this->Error = $_FILES[$this->JsStatePassElement()]["error"];
-		else
+		if($this->Initialized != true)
 		{
-			$this->HasFile = true;
-			$this->TempPath = $_FILES[$this->JsStatePassElement()]["tmp_name"];
-			$this->Name = $_FILES[$this->JsStatePassElement()]["name"];
-			$this->Size = $_FILES[$this->JsStatePassElement()]["size"];
-			$this->Type = $_FILES[$this->JsStatePassElement()]["type"];
-			
+			$this->Initialized = true;
+			$this->HasFile = false;
+			$this->Error = "";
+			$this->Name = "";
+			$this->Size = 0;
+			$this->Type = "";
+			$this->Contents = "";
+		}
+		
+		if(isset($_FILES[$this->JsStatePassElement()]))
+		{
+			if($_FILES[$this->JsStatePassElement()]["error"] > 0)
+			{
+				$this->Error = $_FILES[$this->JsStatePassElement()]["error"];
+				$this->HasFile = false;
+				$this->Name = "";
+				$this->Size = 0;
+				$this->Type = "";
+				$this->Contents = "";
+				$this->TempPath = "";
+			}
+			else
+			{
+				$this->HasFile = true;
+				$this->Error = $_FILES[$this->JsStatePassElement()]["error"];
+				$this->Contents = file_get_contents($_FILES[$this->JsStatePassElement()]["tmp_name"]);
+				$this->Name = $_FILES[$this->JsStatePassElement()]["name"];
+				$this->Size = $_FILES[$this->JsStatePassElement()]["size"];
+				$this->Type = $_FILES[$this->JsStatePassElement()]["type"];
+				$this->TempPath = $_FILES[$this->JsStatePassElement()]["tmp_name"];
+				$this->Error = "";
+			}
 		}
 	}
 	

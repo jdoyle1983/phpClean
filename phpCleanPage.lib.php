@@ -175,6 +175,14 @@ class phpcPage
 			}
 			else if(strtolower($InputNode->Name) == "body")
 			{
+				$formNode = $newNode->addChild("form");
+				$formNode->addAttribute("id", "phpCleanBaseForm");
+				$formNode->addAttribute("enctype", "multipart/form-data");
+				$formNode->addAttribute("method", "POST");
+				$formNode->addAttribute("action", phpcUtils::SelfUrl());
+				
+				$newNode = $formNode;
+				
 				$vsNode = $newNode->addChild( "input" );
 				$vsNode->addAttribute( "type", "hidden" );
 				$vsNode->addAttribute( "id", "ViewState" );
