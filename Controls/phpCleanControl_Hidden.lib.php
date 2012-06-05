@@ -91,8 +91,8 @@ class phpcControl_Hidden extends phpcControl
 	public function DrawControl(&$OutputParent, &$InputNode)
 	{
 		$input = $OutputParent->addChild("input");
-		$input->addAttribute("id", JsStatePassElement());
-		$input->addAttribute("name", JsStatePassElement());
+		$input->addAttribute("id", $this->JsStatePassElement());
+		$input->addAttribute("name", $this->JsStatePassElement());
 		$input->addAttribute("type", "hidden");
 		$input->addAttribute("value", $this->text == null ? "" : $this->text);
 	}
