@@ -20,6 +20,7 @@ Currently there are only a few base objects defined, but it is completely extens
 	* Panel
 	* RadioButton
 	* TextBox
+	* FileUpload
 
 It handles object state management through post backs.  Events can be defined and
 driven through controls (button click event, check box state change...etc).  A

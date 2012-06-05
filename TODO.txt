@@ -1,5 +1,4 @@
 * Asynchronous operation (thinking of using jquery)
 * Additional Controls
-	* File Upload
 	* Literal
 	* Calendar

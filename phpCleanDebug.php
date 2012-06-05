@@ -41,6 +41,7 @@ include_once('Controls/phpCleanControl_RadioButton.lib.php');
 include_once('Controls/phpCleanControl_TextBox.lib.php');
 include_once('Controls/phpCleanControl_Image.lib.php');
 include_once('Controls/phpCleanControl_Hidden.lib.php');
+include_once('Controls/phpCleanControl_FileUpload.lib.php');
 
 include_once('phpCleanPage.lib.php');
 

@@ -100,6 +100,20 @@ class Page extends phpcPage
 	{
 		$this->setGroupLabel();
 	}
+	
+	function btnUploadFile_Click( $sender )
+	{
+		if($this->fuFile->HasFile)
+		{
+			$this->lblResult->Text = "Temp File: " . $this->fuFile->TempPath . "  Size: " . $this->fuFile->Size . "  Name: " . $this->fuFile->Name . "  Type: " . $this->fuFile->Type;
+		}
+		else
+		{
+			$this->lblResult->Text = "No File Uploaded";
+		}
+		
+		$this->hHiddenData->Text = time();
+	}
 }
 
 new Page();

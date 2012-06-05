@@ -47,6 +47,7 @@ function phpClean_FireEvent( item, event )
 	phpClean_Form.setAttribute('method', 'POST');
 	phpClean_Form.setAttribute('OnSubmit', 'return false;');
 	phpClean_Form.setAttribute('action', document.URL);
+	phpClean_Form.setAttribute('enctype', 'multipart/form-data');
 	document.getElementsByTagName('body').item(0).appendChild(phpClean_Form);
     
 	phpClean_PrepareControls( phpClean_Form );
