@@ -70,6 +70,8 @@ phpc:ImageButton - Clickable Image Button
 		onclick - (page class function) - Function to be called when the button is clicked
 		src - (string) - URL to image
 		alt - (string) - Alt text to show
+		width - (int) - Width of the image in pixels
+		height - (int) - Height of the image in pixels
 	CLASS DETAILS  - (All Design Properties Above Available)
 		PROPERTIES:
 			No Additional.
@@ -180,6 +182,61 @@ phpc:ListView - Result From Databound
 		METHODS:
 			DataSource($dataconnection) - Sets the datasource, must be a child of the phpcDataConnection abstract class.
 			DataBind() - Bind the data to the control (force datasource to retreive data, and parse)
+			
+			
+			
+			
+			
+phpc:FileUpload - A File Upload Control
+	DESIGN PROPERTIES:
+		id - (unique control id)
+		visible - (true/false) - Set the controls visibility
+	CLASS DETAILS:
+		PROPERTIES:
+			HasFile - (true/false) - Indicates if the control contains a file
+			Error - (int) - Error Level Returned From PHP
+			Name - (string) - Name of the file uploaded by the user
+			Size - (int) - Size of the file in bytes
+			Type - (string) - Type name specified by PHP
+			Contents - (string) - Contents of the file uploaded
+		METHODS:
+			None.
+			
+			
+			
+			
+			
+phpc:Image - Image Control
+	DESIGN PROPERTIES:
+		id - (unique control id)
+		visible - (true/false) - Set the controls visibility
+		src - (string) - Image URL
+		alt - (string) - Image alt text to display
+		width - (int) - Width of the image in pixels
+		height - (int) - Heigh of the image in pixels
+	CLASS DETAILS:
+		PROPERTIES:
+			No Additional.
+		METHODS:
+			None.
+			
+			
+			
+			
+			
+phpc:Hidden - Hidden Control
+	DESIGN PROPERTIES:
+		id - (unique control id)
+		visible - (true/false) - Set the controls visibility
+		text - (string) - Value of the hidden control
+	CLASS DETAILS:
+		PROPERTIES:
+			No Additional.
+		METHODS:
+			None.
+			
+			
+			
 			
 			
 			

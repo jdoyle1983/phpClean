@@ -26,6 +26,7 @@
 
 class phpcPage
 {
+	var $AppRoot;
 	var $HtmlFile;
 	var $RegisteredControls;
 	var $PageControls;
@@ -34,7 +35,7 @@ class phpcPage
 	var $InputTree;
 	var $OutputTree;
 	
-	function __construct( $markupFile )
+	function __construct( $markupFile, $appRoot )
 	{
 		//Register Base Controls Here
 		$this->RegisterControl(new phpcControl_Button());
@@ -52,6 +53,7 @@ class phpcPage
 		$this->RegisterControl(new phpcControl_TextBox());
 		
 		$parser = new phpcXmlParser($markupFile);
+		$this->AppRoot = $appRoot;
 		$this->InputTree = $parser->ResultTree[0]->Children[0];
 		$this->OutputTree = new phpcXml( "ROOT", null );
 		
@@ -89,8 +91,9 @@ class phpcPage
 	
 	function PrepareJavascript()
 	{
-		$rValue = "";
-		$sourcepath = dirname(__FILE__) . "/phpClean.js";
+		$rValue = "\n";
+		
+		$sourcepath = $this->AppRoot . "phpClean.js";
 		$handle = @fopen($sourcepath, "r");
 		if($handle)
 		{
@@ -169,6 +172,9 @@ class phpcPage
 			
 			if(strtolower($InputNode->Name) == "head")
 			{
+				$jqNode = $newNode->addChild( "script" );
+				$jqNode->addAttribute( "language", "JavaScript" );
+				$jqNode->addAttribute( "src", $this->AppRoot . "jquery-1.7.2.min.js" );
 				$jsNode = $newNode->addChild( "script" );
 				$jsNode->Text = $this->PrepareJavascript();
 				$jsNode->addAttribute( "language", "JavaScript" );

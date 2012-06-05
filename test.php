@@ -27,7 +27,7 @@ class Page extends phpcPage
 {
 	function __construct()
 	{
-		parent::__construct("test.phpc.html");
+		parent::__construct("test.phpc.html", "/phpc/");
 	}
 	
 	function Page_Load()

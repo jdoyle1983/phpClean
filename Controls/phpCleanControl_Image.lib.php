@@ -97,13 +97,11 @@ class phpcControl_Image extends phpcControl
 		$input->addAttribute("value", $this->text == null ? "" : $this->text);
 		
 		$img = $OutputParent->addChild("img");
-		if($this->img != null)
-			$img->addAttribute("src", $this->src);
-		if($this->alt != null)
-			$img->addAttribute("alt", $this->alt);
-		if($this->width != null)
+		$input->addAttribute("src", $this->src == null ? "" : $this->src);
+		$input->addAttribute("alt", $this->alt == null ? "" : $this->alt);
+		if($this->width != null && $this->width != "")
 			$img->addAttribute("width", $this->width);
-		if($this->height != null)
+		if($this->height != null && $this->height != "")
 			$img->addAttribute("height", $this->height);
 	}
 	

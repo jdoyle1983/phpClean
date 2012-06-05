@@ -96,6 +96,10 @@ class phpcControl_ImageButton extends phpcControl
 		$input->addAttribute("type", "image");
 		$input->addAttribute("src", $this->src == null ? "" : $this->src);
 		$input->addAttribute("alt", $this->alt == null ? "" : $this->alt);
+		if($this->width != null && $this->width != "")
+			$img->addAttribute("width", $this->width);
+		if($this->height != null && $this->height != "")
+			$img->addAttribute("height", $this->height);
 		if($this->onclick != null && $this->onclick != "")
 			$input->addAttribute("OnClick", $this->GenFireEvent("OnClick"));
 	}

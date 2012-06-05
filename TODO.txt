@@ -2,11 +2,3 @@
 * Additional Controls
 	* Literal
 	* Calendar
-	
-Seems as though File Uploads won't work with the current setup.
-Need to implement a "Global" form that is submitted, with all child controls as children,
-this is the form that will get submitted.
-
---OR--
-
-Create a javascript module that reads the file, encodes it, and pushes it as a string.
