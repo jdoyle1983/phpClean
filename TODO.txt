@@ -1,4 +1,3 @@
-* Asynchronous operation (thinking of using jquery)
-* Additional Controls
+* Asynchronous operation (using jquery)
+* Additional Control(s)
 	* Literal
-	* Calendar

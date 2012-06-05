@@ -239,6 +239,21 @@ phpc:Hidden - Hidden Control
 			
 			
 			
+phpc:Calendar - Calendar Selection Control
+	DESIGN PROPERTIES:
+		id - (unique control id)
+		visible - (true/false) - Set the controls visibility
+		text - (special string) - Date value (MM/DD/YYYY)
+	CLASS DETAILS:
+		PROPERTIES:
+			No Additional.
+		METHODS:
+			None.
+			
+			
+			
+			
+			
 			
 			
 NON DESIGNER CLASSES
