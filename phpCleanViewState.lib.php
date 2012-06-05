@@ -34,13 +34,7 @@ class phpcViewState
 	
 	function GetViewState()
 	{
-		return base64_encode($this -> GetViewStatePlain());
-		//$uncompressed = $this->GetViewStatePlain();
-		//$compressed = gzdeflate( $uncompressed, 9 );
-		//$hex = $compressed;
-		//for( $i = 0; $i < strlen( $compressed ); $i++ )
-		//	$hex .= dechex( ord( $compressed[$i] ) );
-		//return $hex;
+		return base64_encode(gzcompress($this -> GetViewStatePlain(), 9));
 	}
 	
 	function GetViewStatePlain()
@@ -58,18 +52,13 @@ class phpcViewState
 			$out .= $this -> ObjectKeys[$i] . "(@~";
 			$out .= $this -> ObjectValues[$i] . "=`^";
 		}
-		//Return plain string
-		//echo $out . "<br />";
 		return $out;
 	}
 	
 	function RestoreViewState( $State )
 	{
-		//$hex = $State;
-		//$compressed = $hex;
-		//for( $i = 0; $i < strlen( $hex ); $i = $i + 2 )
-		//	$compressed .= chr( hexdec( substr( $hex, $i, 2 ) ) );
-		$uncompressed = base64_decode($State);// gzinflate( $compressed );
+		$uncompressed = base64_decode(gzuncompress($State));// gzinflate( $compressed );
+
 		//Break out individual objects
 		$tObjects = explode( "=`^", $uncompressed );
 		//Iterate through each object

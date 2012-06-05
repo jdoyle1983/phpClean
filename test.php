@@ -105,7 +105,7 @@ class Page extends phpcPage
 		if($this->fuFile->HasFile)
 		{
 			$this->lblResult->Text = "Error: " . $this->fuFile->Error . "  Has File: " . $this->fuFile->HasFile . "  Temp File: " . $this->fuFile->TempPath . "  Size: " . $this->fuFile->Size . "  Name: " . $this->fuFile->Name . "  Type: " . $this->fuFile->Type;
-			$this->lblResult2 = $this->fuFile->Contents;
+			$this->lblResult2->Text = $this->fuFile->Contents;
 		}
 		else
 		{

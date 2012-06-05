@@ -106,7 +106,6 @@ class phpcControl_FileUpload extends phpcControl
 				$this->Size = 0;
 				$this->Type = "";
 				$this->Contents = "";
-				$this->TempPath = "";
 			}
 			else
 			{
@@ -116,7 +115,6 @@ class phpcControl_FileUpload extends phpcControl
 				$this->Name = $_FILES[$this->JsStatePassElement()]["name"];
 				$this->Size = $_FILES[$this->JsStatePassElement()]["size"];
 				$this->Type = $_FILES[$this->JsStatePassElement()]["type"];
-				$this->TempPath = $_FILES[$this->JsStatePassElement()]["tmp_name"];
 				$this->Error = "";
 			}
 		}
