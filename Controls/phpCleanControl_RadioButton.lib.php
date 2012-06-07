@@ -83,7 +83,10 @@ class phpcControl_RadioButton extends phpcControl
 	}
 	
 	
-	
+	public function JsSupportsAjax()
+	{
+		return false;
+	}
 	
 	public function JsAjaxUpdate()
 	{

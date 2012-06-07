@@ -35,6 +35,11 @@ class phpcUtils
 		return ((isset($_SERVER['HTTPS']) == true && $_SERVER['HTTPS'] == 'on') ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 	}
 	
+	public static function PreAppRoot()
+	{
+		return ((isset($_SERVER['HTTPS']) == true && $_SERVER['HTTPS'] == 'on') ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'];
+	}
+	
 	public static function IsTrueVal( $val )
 	{
 		if($val != null)

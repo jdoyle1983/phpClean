@@ -76,7 +76,10 @@ class phpcControl_ImageButton extends phpcControl
 	}
 	
 	
-	
+	public function JsSupportsAjax()
+	{
+		return false;
+	}
 	
 	public function JsAjaxUpdate()
 	{

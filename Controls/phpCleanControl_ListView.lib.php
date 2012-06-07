@@ -85,7 +85,10 @@ class phpcControl_ListView extends phpcControl
 	}
 	
 	
-	
+	public function JsSupportsAjax()
+	{
+		return false;
+	}
 	
 	public function JsAjaxUpdate()
 	{

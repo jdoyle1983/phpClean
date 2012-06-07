@@ -68,7 +68,10 @@ class phpcControl_Calendar extends phpcControl
 	}
 	
 	
-	
+	public function JsSupportsAjax()
+	{
+		return false;
+	}
 	
 	public function AddJavaScript()
 	{

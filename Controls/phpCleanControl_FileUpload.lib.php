@@ -76,7 +76,10 @@ class phpcControl_FileUpload extends phpcControl
 	}
 	
 	
-	
+	public function JsSupportsAjax()
+	{
+		return false;
+	}
 	
 	public function JsAjaxUpdate()
 	{

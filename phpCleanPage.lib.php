@@ -36,6 +36,7 @@ class phpcPage
 	var $OutputTree;
 	
 	var $AsyncOperation;
+	var $AsyncJavaLoad;
 	
 	var $IsAsyncPage;
 	
@@ -66,9 +67,20 @@ class phpcPage
 		
 		//Check For Async Operation
 		if(isset($_REQUEST['__PHPCLEAN_ASYNC_OPERATION__']))
+		{
 			$this->AsyncOperation = true;
-		else
+			$this->AsyncJavaLoad = false;
+		}
+		else if(isset($_REQUEST['__PHPCLEAN_ASYNC_JAVALOAD__']))
+		{
+			$this->AsyncJavaLoad = true;
 			$this->AsyncOperation = false;
+		}
+		else
+		{
+			$this->AsyncOperation = false;
+			$this->AsyncJavaLoad = false;
+		}
 		
 		$this->Parse();
 		
@@ -127,32 +139,12 @@ class phpcPage
 			$rValue .= "        phpClean_AddFieldByValue( Form, '" . $ArKeys[$i] . "','" . $ArKeys[$i] . "','" . $_GET[$ArKeys[$i]] . "');\n";
 		$rValue .= "}\n\n\n";
 		
-		$rValue .= "function phpClean_CleanupControls( Form )";
-		$rValue .= "{\n";
-		for($i = 0; $i < count($this->PageControls); $i++)
-		{
-			$obj = $this->PageControls[$i]['Control'];
-			$rValue .= "        phpClean_RemoveFieldByElement( Form, '" . $obj->id . "' );\n";
-		}
-		$rValue .= "}\n\n\n";
-		
 		for($i = 0; $i < count($this->PageControls); $i++)
 		{
 			$inScript = $this->PageControls[$i]['Control']->_AddJavaScript();
 			if(trim($inScript) != "")
 				$rValue .= $inScript . "\n\n";
 		}
-		
-		$rValue .= "function phpClean_AsyncUpdate(Keys,Values,Count)\n";
-		$rValue .= "{\n";
-		for($i = 0; $i < count($this->PageControls); $i++)
-		{
-			$inScript = $this->PageControls[$i]['Control']->JsAjaxUpdate();
-			if(trim($inScript) != "")
-				$rValue .= $inScript . "\n";
-		}
-		$rValue .= "}\n\n";
-		
 			
 		return $rValue;
 	}
@@ -165,6 +157,8 @@ class phpcPage
 			{
 				$newControl = $this->RegisteredControls[$i]->GetInstance();
 				$newControl->_SetPage($this);
+				if($this->IsAsyncPage && !$newControl->JsSupportsAjax())
+					$this->IsAsyncPage = false;
 				$newControl->_ParseObject($InputObject);
 				$this->PageControls[] = array( 'Name' => $newControl->id, 'Control' => $newControl );
 			}
@@ -208,16 +202,20 @@ class phpcPage
 				$jquNode->addAttribute( "src", $this->AppRoot . "js/jquery-ui-1.8.20.custom.min.js" );
 				$jquNode->Text = "//jQuery UI";
 				
+				$pcNode = $newNode->addChild( "script" );
+				$pcNode->addAttribute( "src", $this->AppRoot . "js/phpClean.js" );
+				$pcNode->Text = "//phpClean";
+				
 				if($this->IsAsyncPage)
 				{ 
 					$jfNode = $newNode->addChild( "script" );
 					$jfNode->addAttribute( "src", $this->AppRoot . "js/jquery.form.js" );
 					$jfNode->Text = "//jQuery Form";
+					
+					$asNode = $newNode->addChild( "script" );
+					$asNode->addAttribute( "src", phpcUtils::SelfUrl() . "?__PHPCLEAN_ASYNC_JAVALOAD__=1" );
+					$asNode->Text = "//phpClean AjaxUtils";
 				}
-				
-				$pcNode = $newNode->addChild( "script" );
-				$pcNode->addAttribute( "src", $this->AppRoot . "js/phpClean.js" );
-				$pcNode->Text = "//phpClean";
 				
 				$jsNode = $newNode->addChild( "script" );
 				$jsNode->Text = $this->PrepareJavascript();
@@ -284,7 +282,7 @@ class phpcPage
 		for($i = 0; $i < count($this->PageControls); $i++)
 			$this->PageControls[$i]['Control']->_SaveToViewState( $this->ViewState );
 		
-		if($this->AsyncOperation == false)
+		if($this->AsyncOperation == false && $this->AsyncJavaLoad == false)
 		{
 			if(method_exists($this, "PreRender"))
 				$this->PreRender();
@@ -296,7 +294,7 @@ class phpcPage
 			
 			$this->OutputTree->baseOutput();
 		}
-		else
+		else if($this->AsyncOperation == true)
 		{
 			$returnData = "";
 			for($i = 0; $i < count($this->PageControls); $i++)
@@ -308,13 +306,33 @@ class phpcPage
 				$returnData .= "@@%";
 			}
 			$returnData .= "ViewState@@#Value@@*" . $this->ViewState->GetViewState() . "@@$@@%";
-			$returnData .= "ReceivedData@@#Value@@*";
 			
 			echo $returnData;
-			print_r($_REQUEST);
-			echo "@@$@@%";
+		}
+		else if($this->AsyncJavaLoad == true)
+		{
+			$rValue = file_get_contents( phpcUtils::PreAppRoot() . $this->AppRoot . "js/phpCleanAsync.js" );
+			$rValue .= "function phpClean_AsyncCleanupControls( Form )";
+			$rValue .= "{\n";
+			for($i = 0; $i < count($this->PageControls); $i++)
+			{
+				$obj = $this->PageControls[$i]['Control'];
+				$rValue .= "        phpClean_RemoveFieldByElement( Form, '" . $obj->id . "' );\n";
+			}
+			$rValue .= "}\n\n\n";
 			
-			//echo $returnData;
+			$rValue .= "function phpClean_AsyncUpdate(Keys,Values,Count)\n";
+			$rValue .= "{\n";
+			for($i = 0; $i < count($this->PageControls); $i++)
+			{
+				$inScript = $this->PageControls[$i]['Control']->JsAjaxUpdate();
+				if(trim($inScript) != "")
+					$rValue .= $inScript . "\n";
+			}
+			$rValue .= "}\n\n";
+			
+			
+			echo $rValue;
 		}
 	}
 }

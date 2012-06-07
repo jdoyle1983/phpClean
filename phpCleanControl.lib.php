@@ -154,6 +154,7 @@ abstract class phpcControl
 	abstract public function JsStatePassValue();
 	abstract public function JsStateCustom();
 	abstract public function JsStateCustomScript();
+	abstract public function JsSupportsAjax();
 	abstract public function JsAjaxUpdate();
 	abstract public function GetInstance();
 	abstract public function PrepareStates();
