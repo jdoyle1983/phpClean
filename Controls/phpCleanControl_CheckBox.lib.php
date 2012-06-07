@@ -66,7 +66,7 @@ class phpcControl_CheckBox extends phpcControl
 	{
 		$fCall1 = "        phpClean_AddFieldByValue( Form, '" . $this->id . "','" . $this->id . "','checked');";
 		$fCall2 = "        phpClean_AddFieldByValue( Form, '" . $this->id . "','" . $this->id . "','');";
-		$rValue = "        if(" . $this->JsStatePassElement() . ".checked == 1)\n";
+		$rValue = "        if($('#" . $this->JsStatePassElement() . "').is(':checked'))\n";
 		$rValue .= "                " . $fCall1 . "\n";
 		$rValue .= "        else\n";
 		$rValue .= "                " . $fCall2 . "\n";
@@ -77,6 +77,14 @@ class phpcControl_CheckBox extends phpcControl
 	
 	
 	public function AddJavaScript()
+	{
+		return "";
+	}
+	
+	
+	
+	
+	public function JsAjaxUpdate()
 	{
 		return "";
 	}

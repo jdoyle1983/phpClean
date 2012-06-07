@@ -78,6 +78,14 @@ class phpcControl_Image extends phpcControl
 	
 	
 	
+	public function JsAjaxUpdate()
+	{
+		return "";
+	}
+	
+	
+	
+	
 	public function ParseObject(&$InObject)
 	{
 		

@@ -85,6 +85,14 @@ class phpcControl_ListView extends phpcControl
 	}
 	
 	
+	
+	
+	public function JsAjaxUpdate()
+	{
+		return "";
+	}
+	
+	
 	function DataSource( $Source )
 	{
 		$this->DataConnection = $Source;

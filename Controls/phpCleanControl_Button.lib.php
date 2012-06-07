@@ -77,6 +77,14 @@ class phpcControl_Button extends phpcControl
 	
 	
 	
+	public function JsAjaxUpdate()
+	{
+		return "";
+	}
+	
+	
+	
+	
 	public function ParseObject(&$InObject)
 	{
 		
@@ -92,7 +100,7 @@ class phpcControl_Button extends phpcControl
 		$newNode = $OutputParent->addChild("input");
 		$newNode->addAttribute("id", $this->JsStatePassElement());
 		$newNode->addAttribute("name", $this->JsStatePassElement());
-		$newNode->addAttribute("type", "submit");
+		$newNode->addAttribute("type", "button");
 		$newNode->addAttribute("value", $this->text == null ? "" : $this->text);
 		if($this->onclick != null && $this->onclick != "")
 			$newNode->addAttribute("OnClick", $this->GenEventCall("OnClick"));

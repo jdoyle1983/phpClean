@@ -67,7 +67,7 @@ class phpcControl_RadioButton extends phpcControl
 		//Change the which callback is called based on the state of the checkbox
 		$fCall1 = "        phpClean_AddFieldByValue( Form, '" . $this->id . "','" . $this->id . "','checked');";
 		$fCall2 = "        phpClean_AddFieldByValue( Form, '" . $this->id . "','" . $this->id . "','');";
-		$rValue = "        if(" . $this->JsStatePassElement() . ".checked == 1)\n";
+		$rValue = "        if($('#" . $this->JsStatePassElement() . "').is(':checked'))\n";
 		$rValue .= "                " . $fCall1 . "\n";
 		$rValue .= "        else\n";
 		$rValue .= "                " . $fCall2 . "\n";
@@ -78,6 +78,14 @@ class phpcControl_RadioButton extends phpcControl
 	
 	
 	public function AddJavaScript()
+	{
+		return "";
+	}
+	
+	
+	
+	
+	public function JsAjaxUpdate()
 	{
 		return "";
 	}

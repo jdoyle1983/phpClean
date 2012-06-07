@@ -35,8 +35,14 @@ class phpcPage
 	var $InputTree;
 	var $OutputTree;
 	
-	function __construct( $markupFile, $appRoot )
+	var $AsyncOperation;
+	
+	var $IsAsyncPage;
+	
+	function __construct( $markupFile, $appRoot, $AsyncPage )
 	{
+		$this->IsAsyncPage = $AsyncPage;
+	
 		//Register Base Controls Here
 		$this->RegisterControl(new phpcControl_Button());
 		$this->RegisterControl(new phpcControl_Calendar());
@@ -57,6 +63,12 @@ class phpcPage
 		$this->AppRoot = $appRoot;
 		$this->InputTree = $parser->ResultTree[0]->Children[0];
 		$this->OutputTree = new phpcXml( "ROOT", null );
+		
+		//Check For Async Operation
+		if(isset($_REQUEST['__PHPCLEAN_ASYNC_OPERATION__']))
+			$this->AsyncOperation = true;
+		else
+			$this->AsyncOperation = false;
 		
 		$this->Parse();
 		
@@ -115,12 +127,32 @@ class phpcPage
 			$rValue .= "        phpClean_AddFieldByValue( Form, '" . $ArKeys[$i] . "','" . $ArKeys[$i] . "','" . $_GET[$ArKeys[$i]] . "');\n";
 		$rValue .= "}\n\n\n";
 		
+		$rValue .= "function phpClean_CleanupControls( Form )";
+		$rValue .= "{\n";
+		for($i = 0; $i < count($this->PageControls); $i++)
+		{
+			$obj = $this->PageControls[$i]['Control'];
+			$rValue .= "        phpClean_RemoveFieldByElement( Form, '" . $obj->id . "' );\n";
+		}
+		$rValue .= "}\n\n\n";
+		
 		for($i = 0; $i < count($this->PageControls); $i++)
 		{
 			$inScript = $this->PageControls[$i]['Control']->_AddJavaScript();
 			if(trim($inScript) != "")
 				$rValue .= $inScript . "\n\n";
 		}
+		
+		$rValue .= "function phpClean_AsyncUpdate(Keys,Values,Count)\n";
+		$rValue .= "{\n";
+		for($i = 0; $i < count($this->PageControls); $i++)
+		{
+			$inScript = $this->PageControls[$i]['Control']->JsAjaxUpdate();
+			if(trim($inScript) != "")
+				$rValue .= $inScript . "\n";
+		}
+		$rValue .= "}\n\n";
+		
 			
 		return $rValue;
 	}
@@ -132,8 +164,8 @@ class phpcPage
 			if(strtolower($this->RegisteredControls[$i]->RespondsToTag()) == strtolower($InputObject->Name))
 			{
 				$newControl = $this->RegisteredControls[$i]->GetInstance();
-				$newControl->_ParseObject($InputObject);
 				$newControl->_SetPage($this);
+				$newControl->_ParseObject($InputObject);
 				$this->PageControls[] = array( 'Name' => $newControl->id, 'Control' => $newControl );
 			}
 		}
@@ -164,20 +196,27 @@ class phpcPage
 			if(strtolower($InputNode->Name) == "head")
 			{
 				$jqucNode = $newNode->addChild( "link" );
-				$jqucNode->addAttribute( "href", $this->AppRoot . "jquery-ui-1.8.20.custom.css" );
+				$jqucNode->addAttribute( "href", $this->AppRoot . "css/jquery-ui-1.8.20.custom.css" );
 				$jqucNode->addAttribute( "rel", "stylesheet" );
 				$jqucNode->addAttribute( "type", "text/css" );
 				
 				$jqNode = $newNode->addChild( "script" );
-				$jqNode->addAttribute( "src", $this->AppRoot . "jquery-1.7.2.min.js" );
+				$jqNode->addAttribute( "src", $this->AppRoot . "js/jquery-1.7.2.min.js" );
 				$jqNode->Text = "//jQuery";
 				
 				$jquNode = $newNode->addChild( "script" );
-				$jquNode->addAttribute( "src", $this->AppRoot . "jquery-ui-1.8.20.custom.min.js" );
+				$jquNode->addAttribute( "src", $this->AppRoot . "js/jquery-ui-1.8.20.custom.min.js" );
 				$jquNode->Text = "//jQuery UI";
 				
+				if($this->IsAsyncPage)
+				{ 
+					$jfNode = $newNode->addChild( "script" );
+					$jfNode->addAttribute( "src", $this->AppRoot . "js/jquery.form.js" );
+					$jfNode->Text = "//jQuery Form";
+				}
+				
 				$pcNode = $newNode->addChild( "script" );
-				$pcNode->addAttribute( "src", $this->AppRoot . "phpClean.js" );
+				$pcNode->addAttribute( "src", $this->AppRoot . "js/phpClean.js" );
 				$pcNode->Text = "//phpClean";
 				
 				$jsNode = $newNode->addChild( "script" );
@@ -187,6 +226,7 @@ class phpcPage
 			{
 				$formNode = $newNode->addChild("form");
 				$formNode->addAttribute("id", "phpCleanBaseForm");
+				$formNode->addAttribute("name", "phpCleanBaseForm");
 				$formNode->addAttribute("enctype", "multipart/form-data");
 				$formNode->addAttribute("method", "POST");
 				$formNode->addAttribute("action", phpcUtils::SelfUrl());
@@ -209,10 +249,10 @@ class phpcPage
 		$this->ParseNodes($this->InputTree);
 		
 		$this->PageVariables[] = array('Name' => "ViewState", 'Object' => new phpcViewState());
-		if( isset($_REQUEST['ViewState']) )
+		if( isset($_REQUEST['PostBackViewState']) )
 		{
 			$this->PageVariables[] = array('Name' => "IsPostBack", 'Object' => true);
-			$this->ViewState->RestoreViewState( $_REQUEST['ViewState'] );
+			$this->ViewState->RestoreViewState( $_REQUEST['PostBackViewState'] );
 			for( $i = 0; $i < count($this->PageControls); $i++ )
 			{
 				$this->PageControls[$i]['Control']->_LoadFromViewState( $this->ViewState );
@@ -243,16 +283,39 @@ class phpcPage
 		
 		for($i = 0; $i < count($this->PageControls); $i++)
 			$this->PageControls[$i]['Control']->_SaveToViewState( $this->ViewState );
-			
-		if(method_exists($this, "PreRender"))
-			$this->PreRender();
 		
-		$this->DrawNodes( $this->InputTree, $this->OutputTree );
+		if($this->AsyncOperation == false)
+		{
+			if(method_exists($this, "PreRender"))
+				$this->PreRender();
 		
-		if(method_exists($this, "PostRender"))
-			$this->PostRender();
+			$this->DrawNodes( $this->InputTree, $this->OutputTree );
+		
+			if(method_exists($this, "PostRender"))
+				$this->PostRender();
 			
-		$this->OutputTree->baseOutput();
+			$this->OutputTree->baseOutput();
+		}
+		else
+		{
+			$returnData = "";
+			for($i = 0; $i < count($this->PageControls); $i++)
+			{
+				$obj = $this->PageControls[$i]['Control'];
+				$returnData .= $obj->id . "@@#";
+				for($e = 0; $e < count($obj->Properties); $e++)
+					$returnData .= strtolower($obj->Properties[$e]['Name']) . "@@*" . $obj->Properties[$e]['Value'] . "@@$";
+				$returnData .= "@@%";
+			}
+			$returnData .= "ViewState@@#Value@@*" . $this->ViewState->GetViewState() . "@@$@@%";
+			$returnData .= "ReceivedData@@#Value@@*";
+			
+			echo $returnData;
+			print_r($_REQUEST);
+			echo "@@$@@%";
+			
+			//echo $returnData;
+		}
 	}
 }
 

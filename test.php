@@ -25,9 +25,9 @@ include_once('phpCleanDebug.php');
 
 class Page extends phpcPage
 {
-	function __construct()
+	function __construct( $AppRoot, $AsyncPage )
 	{
-		parent::__construct("test.phpc.html", "/phpc/");
+		parent::__construct("test.phpc.html", $AppRoot, $AsyncPage);
 	}
 	
 	function Page_Load()
@@ -117,6 +117,6 @@ class Page extends phpcPage
 	}
 }
 
-new Page();
+new Page( "/phpc/", true );
 
 ?>

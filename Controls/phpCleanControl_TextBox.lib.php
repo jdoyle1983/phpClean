@@ -78,6 +78,14 @@ class phpcControl_TextBox extends phpcControl
 	
 	
 	
+	public function JsAjaxUpdate()
+	{
+		return "        $('#" . $this->JsStatePassElement() . "').val(GetAsyncValue(Keys,Values,Count,'" . $this->id . "', 'text'));";
+	}
+	
+	
+	
+	
 	public function ParseObject(&$InObject)
 	{
 		

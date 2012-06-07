@@ -79,6 +79,14 @@ class phpcControl_DataResult extends phpcControl
 	}
 	
 	
+	
+	
+	public function JsAjaxUpdate()
+	{
+		return "";
+	}
+	
+	
 	function DataSource( $Source )
 	{
 		$this->DataConnection = $Source;

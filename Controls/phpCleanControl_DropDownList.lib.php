@@ -78,6 +78,14 @@ class phpcControl_DropDownList extends phpcControl
 	}
 	
 	
+	
+	
+	public function JsAjaxUpdate()
+	{
+		return "";
+	}
+	
+	
 	function SelectedName()
 	{
 		if($this->SelectedIndex != -1)

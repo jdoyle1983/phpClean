@@ -78,6 +78,16 @@ class phpcControl_Label extends phpcControl
 	
 	
 	
+	public function JsAjaxUpdate()
+	{
+		$rValue = "        $('#" . $this->JsStatePassElement() . "_Val').text(GetAsyncValue(Keys,Values,Count,'" . $this->id . "', 'text'));\n";
+		$rValue .= "        $('#" . $this->JsStatePassElement() . "').val(GetAsyncValue(Keys,Values,Count,'" . $this->id . "', 'text'));";
+		return $rValue;
+	}
+	
+	
+	
+	
 	public function ParseObject(&$InObject)
 	{
 		
@@ -96,6 +106,7 @@ class phpcControl_Label extends phpcControl
 		$input->addAttribute("name", $this->JsStatePassElement());
 		$input->addAttribute("value", $this->Text == null ? "" : $this->Text);
 		$span = $OutputParent->addChild("span");
+		$span->addAttribute("id", $this->JsStatePassElement() . "_Val");
 		$span->Text = $this->Text == null ? "" : $this->Text;
 	}
 	

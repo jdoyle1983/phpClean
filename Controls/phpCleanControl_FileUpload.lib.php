@@ -59,18 +59,26 @@ class phpcControl_FileUpload extends phpcControl
 	
 	public function JsStateCustom()
 	{
-		return true;
+		return false;
 	}
 	
 	public function JsStateCustomScript()
 	{
-		return "        Form.appendChild( document.getElementById( '" . $this->JsStatePassElement() . "' ) );\n";
+		return "";
 	}
 	
 	
 	
 	
 	public function AddJavaScript()
+	{
+		return "";
+	}
+	
+	
+	
+	
+	public function JsAjaxUpdate()
 	{
 		return "";
 	}

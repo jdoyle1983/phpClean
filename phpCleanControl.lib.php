@@ -77,7 +77,10 @@ abstract class phpcControl
 	
 	function GenEventCall($event)
 	{
-		return "phpClean_FireEvent('" . $this->id . "','" . $event . "');";
+		if($this->phpcPage->IsAsyncPage == true)
+			return "phpClean_FireAsyncEvent('" . $this->id . "','" . $event . "');";
+		else
+			return "phpClean_FireEvent('" . $this->id . "','" . $event . "');";
 	}
 	
 	function SetStateProperty($name, $value)
@@ -151,6 +154,7 @@ abstract class phpcControl
 	abstract public function JsStatePassValue();
 	abstract public function JsStateCustom();
 	abstract public function JsStateCustomScript();
+	abstract public function JsAjaxUpdate();
 	abstract public function GetInstance();
 	abstract public function PrepareStates();
 	abstract public function RetrieveStates();
