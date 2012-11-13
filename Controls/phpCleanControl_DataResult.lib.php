@@ -131,7 +131,7 @@ class phpcControl_DataResult extends phpcControl
 			$uheadercolumn->addAttribute("colspan", $this->ResultData["FieldCount"]);
 			$ucenter = $uheadercolumn->addChild("center");
 			$ubold = $ucenter->addChild("b");
-			$ubold->Text = ($this->Text == null ? '' : $this->text);
+			$ubold->Text = ($this->Text == null ? '' : $this->Text);
 			
 			if($this->ShowHeaders == null || phpcUtils::IsTrueVal($this->ShowHeaders))
 			{
