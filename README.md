@@ -2,10 +2,7 @@ phpClean
 ========
 
 PHP Based Object Oriented Pages
-
-PHP is great, but it reminds me of the old ASP days.  I always really liked the
-concept of code behind pages like in ASP.NET.  I always thought PHP should 
-implement something like that, so I created this library to do just that.
+Code behind development style for PHP.
 
 Currently there are only a few base objects defined, but it is completely extensible:
 	* Button

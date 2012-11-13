@@ -22,7 +22,7 @@
 //    				email: 			jdoyle1983@gmail.com
 
 
-
+//#BEGIN_EXPORT
 abstract class phpcControl
 {
 	//The Page This Control Belongs To
@@ -160,5 +160,6 @@ abstract class phpcControl
 	abstract public function PrepareStates();
 	abstract public function RetrieveStates();
 }
+//#END_EXPORT
 
 ?>

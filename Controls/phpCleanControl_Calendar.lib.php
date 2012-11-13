@@ -22,7 +22,7 @@
 //    				email: 			jdoyle1983@gmail.com
 
 
-
+//#BEGIN_EXPORT
 class phpcControl_Calendar extends phpcControl
 {
 	public function RespondsToTag()
@@ -116,5 +116,6 @@ class phpcControl_Calendar extends phpcControl
 		
 	}
 }
+//#END_EXPORT
 
 ?>

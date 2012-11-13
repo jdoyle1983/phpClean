@@ -22,7 +22,7 @@
 //    				email: 			jdoyle1983@gmail.com
 
 
-
+//#BEGIN_EXPORT
 class phpcControl_Button extends phpcControl
 {
 	public function RespondsToTag()
@@ -118,5 +118,6 @@ class phpcControl_Button extends phpcControl
 	{
 	}
 }
+//#END_EXPORT
 
 ?>

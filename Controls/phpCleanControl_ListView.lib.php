@@ -22,7 +22,7 @@
 //    				email: 			jdoyle1983@gmail.com
 
 
-
+//#BEGIN_EXPORT
 class phpcControl_ListView extends phpcControl
 {
 	var $EmptyDataTemplate;
@@ -253,5 +253,6 @@ class phpcControl_ListView extends phpcControl
 		}
 	}
 }
+//#END_EXPORT
 
 ?>

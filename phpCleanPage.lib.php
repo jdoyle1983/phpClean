@@ -1,4 +1,6 @@
 <?php
+//#BEGIN_EXPORT
+//#VERSION = 0.1.0
 
 //	phpClean
 //		Original Author: Jason Doyle
@@ -39,7 +41,14 @@ class phpcPage
 	var $AsyncJavaLoad;
 	
 	var $IsAsyncPage;
+        
+        var $CurrentVersion = "0.1.0";
 	
+        function GetPhpcVersion()
+        {
+            return $this->CurrentVersion;
+        }
+        
 	function __construct( $markupFile, $appRoot, $AsyncPage )
 	{
 		$this->IsAsyncPage = $AsyncPage;
@@ -336,5 +345,6 @@ class phpcPage
 		}
 	}
 }
+//#END_EXPORT
 
 ?>

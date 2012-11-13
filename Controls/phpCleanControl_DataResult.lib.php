@@ -22,7 +22,7 @@
 //    				email: 			jdoyle1983@gmail.com
 
 
-
+//#BEGIN_EXPORT
 class phpcControl_DataResult extends phpcControl
 {
 	var $DataConnection;
@@ -188,5 +188,6 @@ class phpcControl_DataResult extends phpcControl
 		}
 	}
 }
+//#END_EXPORT
 
 ?>

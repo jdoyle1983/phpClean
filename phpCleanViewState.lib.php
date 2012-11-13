@@ -22,7 +22,7 @@
 //    				email: 			jdoyle1983@gmail.com
 
 
-
+//#BEGIN_EXPORT
 class phpcViewState
 {
 
@@ -172,6 +172,7 @@ class phpcViewState
 		array_shift( $this -> ObjectValues );
 	}
 }
+//#END_EXPORT
 
 
 ?>

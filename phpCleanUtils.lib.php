@@ -22,7 +22,7 @@
 //    				email: 			jdoyle1983@gmail.com
 
 
-
+//#BEGIN_EXPORT
 class phpcUtils
 {
 	private static function str_left($val)
@@ -66,5 +66,6 @@ class phpcUtils
 		return false;
 	}
 }
+//#END_EXPORT
 
 ?>
