@@ -22,7 +22,7 @@
 //    				email: 			jdoyle1983@gmail.com
 
 
-
+//#BEGIN_EXPORT
 class phpcDataConnMySql extends phpcDataConnection
 {
 	//The query the user will call
@@ -153,5 +153,6 @@ class phpcDataConnMySql extends phpcDataConnection
 		return $this -> StoredResults[ $RowId ][ $FieldName ];
 	}
 }
+//#END_EXPORT
 
 ?>

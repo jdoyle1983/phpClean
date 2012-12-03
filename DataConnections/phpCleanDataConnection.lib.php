@@ -22,7 +22,7 @@
 //    				email: 			jdoyle1983@gmail.com
 
 
-
+//#BEGIN_EXPORT
 abstract class phpcDataConnection
 {
 	abstract function Execute();
@@ -31,5 +31,6 @@ abstract class phpcDataConnection
 	abstract function GetFieldName( $FieldId );
 	abstract function GetRowFieldValue( $RowId, $FieldName );
 }
+//#END_EXPORT
 
 ?>

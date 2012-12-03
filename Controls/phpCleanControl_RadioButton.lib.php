@@ -22,7 +22,7 @@
 //    				email: 			jdoyle1983@gmail.com
 
 
-
+//#BEGIN_EXPORT
 class phpcControl_RadioButton extends phpcControl
 {
 	public function RespondsToTag()
@@ -141,5 +141,6 @@ class phpcControl_RadioButton extends phpcControl
 		
 	}
 }
+//#END_EXPORT
 
 ?>

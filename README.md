@@ -1,6 +1,5 @@
 phpClean
 ========
-
 PHP Based Object Oriented Pages
 
 * Complete isolation of page design and code.

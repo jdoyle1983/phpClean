@@ -22,7 +22,7 @@
 //    				email: 			jdoyle1983@gmail.com
 
 
-
+//#BEGIN_EXPORT
 class phpcXmlParser
 {
 	var $ResultTree;
@@ -179,5 +179,6 @@ class phpcXml
 			$output->endElement();
 	}
 }
+//#END_EXPORT
 
 ?>

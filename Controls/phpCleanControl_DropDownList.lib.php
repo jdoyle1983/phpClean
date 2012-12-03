@@ -22,7 +22,7 @@
 //    				email: 			jdoyle1983@gmail.com
 
 
-
+//#BEGIN_EXPORT
 class phpcControl_DropDownList extends phpcControl
 {
 	var $Items;
@@ -206,5 +206,6 @@ class phpcControl_DropDownList extends phpcControl
 		}
 	}
 }
+//#END_EXPORT
 
 ?>

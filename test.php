@@ -21,7 +21,8 @@
 //    	Contact: 
 //    				email: 			jdoyle1983@gmail.com
 
-include_once('phpCleanDebug.php');
+//include_once('phpCleanDebug.php');
+include_once('phpClean_0.1.0.single.php');
 
 class Page extends phpcPage
 {
