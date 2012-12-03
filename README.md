@@ -25,7 +25,7 @@ PHP Based Object Oriented Pages
 * Zero fuss installation, it is pure code, and can be used anywhere
   php is already working.
 * The main drawback is the requirement for strict xml on the design
-  pages.  (All html tags must be self terminating <p/>, or closed
-  <p></p>).
+  pages.  (All html tags must be self terminating &lt;p/&gt;, or closed
+  &lt;p&gt;&lt;/p&gt;).
 
 You can see an example of the library in use in the source tree.
