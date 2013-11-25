@@ -29,3 +29,4 @@ PHP Based Object Oriented Pages
   &lt;p&gt;&lt;/p&gt;).
 
 You can see an example of the library in use in the source tree.
+NetBeans 7.4 Project Provided.
